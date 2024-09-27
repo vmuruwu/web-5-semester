@@ -24,6 +24,30 @@ def not_found(err):
 </body>
 </html>''', 404
 
+@app.route("/cause_error")
+def cause_error():
+    return 1 / 0
+
+@app.errorhandler(500)
+def internal_server_error(err):
+    path404 = url_for("static", filename="404.css")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Ошибка 500 — Внутренняя ошибка сервера</title>
+        <link rel="stylesheet" href="'''+ path404 + '''">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ой! Что-то пошло не так.</h1>
+            <p>На сервере произошла внутренняя ошибка. Попробуйте позже.</p>
+            <p><a href="''' + url_for('index') + '''">Вернуться на главную страницу</a></p>
+        </div>
+    </body>
+</html>
+''', 500
+
 @app.errorhandler(400)
 def bad_request(err):
     return "Неправильный запрос", 400
