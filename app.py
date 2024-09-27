@@ -24,7 +24,7 @@ def not_found(err):
 </body>
 </html>''', 404
 
-@app.route("/cause_error")
+@app.route("/lab1/cause_error")
 def cause_error():
     return 1 / 0
 
@@ -111,6 +111,17 @@ def lab1():
             Относится к категории так называемых микрофреймворков — минималистичных каркасов 
             веб-приложений, сознательно предоставляющих лишь самые базовые возможности.
         </p>
+        <h2>Список роутов</h2>
+            <ul>
+                <li><a href="/lab1/cause_error">Вызов ошибки 500</a></li>
+                <li><a href="/lab1/web">web</a></li>
+                <li><a href="/lab1/author">Автор</a></li>
+                <li><a href="/lab1/oak">Дуб</a></li>
+                <li><a href="/lab1/counter">Счётчик</a></li>
+                <li><a href="/lab1/info">Инфо</a></li>
+                <li><a href="/lab1/created">Создано</a></li>
+                <li><a href="/lab1/about_winter">Зима</a></li>
+            </ul>
         <a href="''' + url_for('index') + '''">На главную</a>
     </body>
 </html>
@@ -199,7 +210,7 @@ def created():
 </html>
 ''', 201
 
-@app.route("/about_winter")
+@app.route("/lab1/about_winter")
 def about_winter():
     winterpic = url_for("static", filename="winter.jpeg")
     return '''
