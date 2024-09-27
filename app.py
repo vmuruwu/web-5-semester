@@ -5,7 +5,24 @@ app = Flask(__name__)
 
 @app.errorhandler(404)
 def not_found(err):
-    return "Такой страницы не существует", 404
+    path404 = url_for("static", filename="404.css")
+    img404 = url_for("static", filename="2034479.png")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Страница не найдена (404)</title>
+        <link rel="stylesheet" href="'''+ path404 + '''">
+    </head>
+<body>
+    <div class="container">
+        <h1>Упс! Страница не найдена</h1>
+        <p>Страница, которую вы ищете, не существует.</p>
+        <img src="''' + img404 + '''" alt="Страница не найдена">
+        <p><a href="''' + url_for('index') + '''">Вернуться на главную страницу</a></p>
+    </div>
+</body>
+</html>''', 404
 
 @app.errorhandler(400)
 def bad_request(err):
