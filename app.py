@@ -6,6 +6,32 @@ def not_found(err):
     return "нет такой страницы", 404
 
 @app.route("/")
+@app.route("/index")
+def index():
+    return '''
+<!doctype html>
+<html lang="ru">
+    <head>
+        <title>НГТУ, ФБ, Лабораторные работы</title>
+    </head>
+    <body>
+        <header>
+            <h1>НГТУ, ФБ, WEB-программирование, часть 2. Список лабораторных</h1>
+        </header>
+        <main>
+            <div>
+                <ul>
+                    <li><a href="''' + url_for('lab1') + '''">Первая лабораторная</a></li>
+                </ul>
+            </div>
+        </main>
+        <footer>
+            <p>Втюрина Наталья Артёмовна, группа ФБИ-24, 3 курс, 2024 год</p>
+        </footer>
+    </body>
+</html>
+'''
+
 @app.route("/lab1/web")
 def web():
     return """<!doctype html>
