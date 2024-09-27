@@ -1,16 +1,38 @@
 from flask import Flask, url_for, redirect
+from werkzeug.exceptions import HTTPException
+
 app = Flask(__name__)
 
 @app.errorhandler(404)
 def not_found(err):
-    return "нет такой страницы", 404
+    return "Такой страницы не существует", 404
+
+@app.errorhandler(400)
+def bad_request(err):
+    return "Неправильный запрос", 400
+
+@app.errorhandler(401)
+def unauthorized(err):
+    return "Требуется авторизация", 401
+
+@app.errorhandler(403)
+def forbidden(err):
+    return "Доступ запрещен", 403
+
+@app.errorhandler(405)
+def method_not_allowed(err):
+    return "Метод не разрешен", 405
+
+@app.errorhandler(418)
+def im_a_teapot(err):
+    return "Я чайник", 418
 
 @app.route("/")
 @app.route("/index")
 def index():
     return '''
 <!doctype html>
-<html lang="ru">
+<html>
     <head>
         <title>НГТУ, ФБ, Лабораторные работы</title>
     </head>
@@ -36,7 +58,7 @@ def index():
 def lab1():
     return '''
 <!doctype html>
-<html lang="ru">
+<html>
     <head>
         <title>Лабораторная 1</title>
     </head>
