@@ -1,0 +1,20 @@
+body {
+    background-color: #e8daff; 
+    color: #000000;            
+    font-family: Arial, sans-serif;
+}
+
+img {
+    width: 300px;              
+    height: auto;
+    margin: 20px 0;
+}
+
+h1 {
+    color: #221a4e;            
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+}
