@@ -1,0 +1,39 @@
+body {
+    background-color:aliceblue;
+    color:#300f31;
+    font-family: Arial;
+    margin: 0px;
+}
+
+header {
+    background-color: #fedeff;
+    color:#330a10;
+    font-family:Impact;
+    padding: 7px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+main {
+    background-color:aliceblue;
+    color:#3c1c06;
+    font-family:Helvetica;
+    padding: 7px;
+    margin: 34px 20px 34px;
+}
+
+footer {
+    background-color: #fedeff;
+    color:#17312f;
+    font-family:Impact;
+    margin: 0px;
+    padding: 7px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    cursor: pointer;
+}
