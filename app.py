@@ -1,4 +1,4 @@
-from flask import Flask, url_for, redirect
+from flask import Flask, url_for, redirect, render_template
 from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
@@ -283,3 +283,7 @@ def add_flower(name):
     </body>
 </html>
 '''
+
+@app.route('/lab2/example')
+def example():
+    return render_template('example.html')
