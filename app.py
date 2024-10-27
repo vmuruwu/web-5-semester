@@ -85,6 +85,7 @@ def index():
             <div>
                 <ul>
                     <li><a href="''' + url_for('lab1') + '''">Первая лабораторная</a></li>
+                    <li><a href="''' + url_for('lab2') + '''">Вторая лабораторная</a></li>
                 </ul>
             </div>
         </main>
