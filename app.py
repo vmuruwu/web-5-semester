@@ -358,3 +358,20 @@ def default_calc():
 @app.route('/lab2/calc/<int:a>')
 def single_param_calc(a):
     return redirect(f'/lab2/calc/{a}/1')
+
+books = [
+        {"author": "Джордж Оруэлл", "title": "1984", "genre": "Дистопия", "pages": 328},
+        {"author": "Харпер Ли", "title": "Убить пересмешника", "genre": "Классика", "pages": 281},
+        {"author": "Дж.К. Роулинг", "title": "Гарри Поттер и философский камень", "genre": "Фэнтези", "pages": 223},
+        {"author": "Дж.Р.Р. Толкин", "title": "Хоббит", "genre": "Фэнтези", "pages": 310},
+        {"author": "Ф. Скотт Фицджеральд", "title": "Великий Гэтсби", "genre": "Классика", "pages": 180},
+        {"author": "Герман Мелвилл", "title": "Моби Дик", "genre": "Приключения", "pages": 635},
+        {"author": "Джейн Остин", "title": "Гордость и предубеждение", "genre": "Романтика", "pages": 279},
+        {"author": "Марк Шусак", "title": "Книжный вор", "genre": "Историческая проза", "pages": 552},
+        {"author": "Габриэль Гарсиа Маркес", "title": "Сто лет одиночества", "genre": "Магический реализм", "pages": 417},
+        {"author": "Халед Хоссейни", "title": "Бегущий за ветром", "genre": "Историческая проза", "pages": 372}
+    ]
+
+@app.route('/lab2/books')
+def show_books():
+    return render_template('book.html', books=books)

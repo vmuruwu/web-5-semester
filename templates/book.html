@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+    <title>Список книг</title>
+</head>
+<body>
+    <header>
+        WEB-программирование, часть 2. Лабораторная работа 2
+    </header>
+
+    <main>
+        <h1>Список книг</h1>
+        <ul>
+            {% for book in books %}
+                <li>
+                    {{ book.author }} - <strong>{{ book.title }}</strong><br>
+                    Жанр: {{ book.genre }}<br>
+                    Количество страниц: {{ book.pages }}
+                </li>
+            {% endfor %}
+        </ul>
+    </main>
+
+    <footer>
+        &copy; Втюрина Наталья, ФБИ-24, 3 курс, 2024
+    </footer>
+</body>
