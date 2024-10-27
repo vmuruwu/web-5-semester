@@ -375,3 +375,15 @@ books = [
 @app.route('/lab2/books')
 def show_books():
     return render_template('book.html', books=books)
+
+berries = [
+    {"name": "Клубника", "description": "Сладкая и сочная, популярная летняя ягода.", "image": "strawberry.jpg"},
+    {"name": "Малина", "description": "Мелкая, кисло-сладкая ягода любима за свой аромат.", "image": "raspberry.jpg"},
+    {"name": "Черника", "description": "Темно-синяя ягода богата антоцианами.", "image": "blueberry.jpeg"},
+    {"name": "Крыжовник", "description": "Кисловатая ягода, часто используется в джемах.", "image": "gooseberry.jpg"},
+    {"name": "Ежевика", "description": "Сладкая и ароматная ягода чёрного цвета.", "image": "blackberry.webp"}
+]
+
+@app.route('/lab2/berries')
+def show_berries():
+    return render_template('berries.html', berries=berries)
