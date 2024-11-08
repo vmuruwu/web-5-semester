@@ -73,8 +73,8 @@ def author():
 
 @lab1.route("/lab1/oak")
 def oak():
-    path = url_for("static", filename="oak.jpg")
-    css_path = url_for("static", filename="lab1.css")
+    path = url_for("static", filename="lab1/oak.jpg")
+    css_path = url_for("static", filename="lab1/lab1.css")
     return '''
 <!doctype html>
 <html>
@@ -132,7 +132,7 @@ def created():
 
 @lab1.route("/lab1/about_winter")
 def about_winter():
-    winterpic = url_for("static", filename="winter.jpeg")
+    winterpic = url_for("static", filename="lab1/winter.jpeg")
     return '''
 <!doctype html>
 <html lang="ru">

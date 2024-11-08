@@ -26,7 +26,7 @@ def flowers(flower_id):
         return "такого цветка нет", 404
     else:
         flower = flowers_list[flower_id]
-        return render_template('flower.html', flower=flower, flower_id=flower_id)
+        return render_template('lab2/flower.html', flower=flower, flower_id=flower_id)
 
 
 @lab2.route('/lab2/add_flower', methods=['POST'])
@@ -36,18 +36,18 @@ def add_flower():
     if not name or not price:
         abort(400, description="вы не задали имя или цену цветка")
     flowers_list.append({"name": name, "price": int(price)})
-    return redirect(url_for('all_flowers'))
+    return redirect(url_for('lab2.all_flowers'))
 
 
 @lab2.route('/lab2/flowers/')
 def all_flowers():
-    return render_template('flowers.html', flowers=flowers_list)
+    return render_template('lab2/flowers.html', flowers=flowers_list)
 
 
 @lab2.route('/lab2/clear_flowers')
 def clear_flowers():
     flowers_list.clear()
-    return redirect(url_for('all_flowers'))
+    return redirect(url_for('lab2.all_flowers'))
 
 
 @lab2.route('/lab2/delete_flower/<int:flower_id>')
@@ -56,7 +56,7 @@ def delete_flower(flower_id):
         return "такого цветка нет", 404
     else:
         del flowers_list[flower_id]
-        return redirect(url_for('all_flowers'))
+        return redirect(url_for('lab2.all_flowers'))
 
 
 @lab2.route('/lab2/example')
@@ -69,25 +69,25 @@ def example():
         {'name': 'мандарины', 'price': 95},
         {'name': 'манго', 'price': 321}
     ]
-    return render_template('example.html',
+    return render_template('lab2/example.html',
                             name = name, lab_num = lab_num, year_num = year_num,
                             group = group, fruits = fruits)
 
 
 @lab2.route('/lab2/')
 def lab():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 
 @lab2.route('/lab2/filters')
 def filters():
     phrase = "О <b>сколько</b> <u>нам</u> <i>открытий</i> чудных..."
-    return render_template('filter.html', phrase = phrase)
+    return render_template('lab2/filter.html', phrase = phrase)
 
 
 @lab2.route('/lab2/calc/<int:a>/<int:b>')
 def calc(a, b):
-    return render_template('calc.html', a = a, b = b)
+    return render_template('lab2/calc.html', a = a, b = b)
 
 
 @lab2.route('/lab2/calc/')
@@ -116,7 +116,7 @@ books = [
 
 @lab2.route('/lab2/books')
 def show_books():
-    return render_template('book.html', books=books)
+    return render_template('lab2/book.html', books=books)
 
 
 berries = [
@@ -130,4 +130,4 @@ berries = [
 
 @lab2.route('/lab2/berries')
 def show_berries():
-    return render_template('berries.html', berries=berries)
+    return render_template('lab2/berries.html', berries=berries)
