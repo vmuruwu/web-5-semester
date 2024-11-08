@@ -37,3 +37,8 @@ footer {
     left: 0;
     cursor: pointer;
 }
+
+.error {
+    color:#ff0000;
+    font-family:Impact;
+}
