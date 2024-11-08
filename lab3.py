@@ -97,3 +97,48 @@ def settings():
     
     return render_template('lab3/settings.html', color=color, bgcolor=bgcolor, fontsize=fontsize, fontfamily=fontfamily)
 
+
+@lab3.route('/lab3/ticket_form')
+def ticket_form():
+    return render_template('lab3/ticket_form.html')
+
+@lab3.route('/lab3/process_ticket', methods=['POST'])
+def process_ticket():
+    fio = request.form.get('fio')
+    berth = request.form.get('berth')
+    linen = 'on' if request.form.get('linen') else 'off'
+    luggage = 'on' if request.form.get('luggage') else 'off'
+    age = request.form.get('age')
+    departure = request.form.get('departure')
+    destination = request.form.get('destination')
+    date = request.form.get('date')
+    insurance = 'on' if request.form.get('insurance') else 'off'
+    
+    # Проверка обязательных полей
+    if not all([fio, berth, age, departure, destination, date]) or not (1 <= int(age) <= 120):
+        abort(400, description="Одно или несколько полей не заполнены или неверный возраст.")
+    
+    # Рассчет стоимости
+    if int(age) < 18:
+        ticket_type = "Детский билет"
+        price = 700
+    else:
+        ticket_type = "Взрослый билет"
+        price = 1000
+    
+    if berth == "нижняя" or berth == "нижняя боковая":
+        price += 100
+    
+    if linen == "on":
+        price += 75
+    
+    if luggage == "on":
+        price += 250
+    
+    if insurance == "on":
+        price += 150
+    
+    return render_template('lab3/ticket.html', fio=fio, berth=berth, linen=linen, luggage=luggage, 
+                           age=age, departure=departure, destination=destination, date=date, 
+                           insurance=insurance, ticket_type=ticket_type, price=price)
+
