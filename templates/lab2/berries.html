@@ -15,12 +15,13 @@
         <h1>Ягоды</h1>
         <ul>
             {% for berry in berries %}
-                <img src="{{ url_for('static', filename=berry.image) }}" alt="{{ berry.name }}" width="23%"> <br>
+                <img src="{{ url_for('static', filename='lab2/' + berry.image) }}" alt="{{ berry.name }}" width="23%"> <br>
                 <strong>{{ berry.name }}</strong><br>
                 {{ berry.description }} <br>
             {% endfor %}
         </ul>
     </main>
+    
 
     <footer>
         &copy; Втюрина Наталья, ФБИ-24, 3 курс, 2024
