@@ -81,21 +81,30 @@ def settings():
         bgcolor = request.form.get('bgcolor')
         fontsize = request.form.get('fontsize')
         fontfamily = request.form.get('fontfamily')
-        
+
         response = make_response(render_template('lab3/settings.html', color=color, bgcolor=bgcolor, fontsize=fontsize, fontfamily=fontfamily))
         response.set_cookie('color', color)
         response.set_cookie('bgcolor', bgcolor)
         response.set_cookie('fontsize', fontsize)
         response.set_cookie('fontfamily', fontfamily)
-        
         return response
-    
+
     color = request.cookies.get('color')
     bgcolor = request.cookies.get('bgcolor')
     fontsize = request.cookies.get('fontsize')
     fontfamily = request.cookies.get('fontfamily')
-    
+
     return render_template('lab3/settings.html', color=color, bgcolor=bgcolor, fontsize=fontsize, fontfamily=fontfamily)
+
+
+@lab3.route('/lab3/clear_settings')
+def clear_settings():
+    response = make_response(redirect(url_for('lab3.settings')))
+    response.delete_cookie('color')
+    response.delete_cookie('bgcolor')
+    response.delete_cookie('fontsize')
+    response.delete_cookie('fontfamily')
+    return response
 
 
 @lab3.route('/lab3/ticket_form')
