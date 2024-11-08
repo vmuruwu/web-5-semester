@@ -73,3 +73,26 @@ def success():
     return render_template('lab3/success.html', price=price)
 
 
+@lab3.route('/lab3/settings', methods=['GET', 'POST'])
+def settings():
+    if request.method == 'POST':
+        color = request.form.get('color')
+        bgcolor = request.form.get('bgcolor')
+        fontsize = request.form.get('fontsize')
+        fontfamily = request.form.get('fontfamily')
+        
+        response = make_response(render_template('lab3/settings.html', color=color, bgcolor=bgcolor, fontsize=fontsize, fontfamily=fontfamily))
+        response.set_cookie('color', color)
+        response.set_cookie('bgcolor', bgcolor)
+        response.set_cookie('fontsize', fontsize)
+        response.set_cookie('fontfamily', fontfamily)
+        
+        return response
+    
+    color = request.cookies.get('color')
+    bgcolor = request.cookies.get('bgcolor')
+    fontsize = request.cookies.get('fontsize')
+    fontfamily = request.cookies.get('fontfamily')
+    
+    return render_template('lab3/settings.html', color=color, bgcolor=bgcolor, fontsize=fontsize, fontfamily=fontfamily)
+

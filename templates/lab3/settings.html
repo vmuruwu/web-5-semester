@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 3{% endblock %}
+
+{% block main %}
+<h1>Настройки стилей</h1>
+<form method="post">
+    <div>
+        <label for="color">Цвет текста:</label>
+        <input type="color" id="color" name="color" value="{{ color or '#000000' }}">
+    </div>
+    <div>
+        <label for="bgcolor">Цвет фона:</label>
+        <input type="color" id="bgcolor" name="bgcolor" value="{{ bgcolor or '#ffffff' }}">
+    </div>
+    <div>
+        <label for="fontsize">Размер шрифта:</label>
+        <input type="number" id="fontsize" name="fontsize" value="{{ fontsize or 16 }}" min="10" max="72">
+    </div>
+    <div>
+        <label for="fontfamily">Шрифт:</label>
+        <select id="fontfamily" name="fontfamily">
+            <option value="Arial" {% if fontfamily == 'Arial' %}selected{% endif %}>Arial</option>
+            <option value="Courier New" {% if fontfamily == 'Courier New' %}selected{% endif %}>Courier New</option>
+            <option value="Georgia" {% if fontfamily == 'Georgia' %}selected{% endif %}>Georgia</option>
+            <option value="Times New Roman" {% if fontfamily == 'Times New Roman' %}selected{% endif %}>Times New Roman</option>
+        </select>
+    </div>
+    <div>
+        <button type="submit">Сохранить</button>
+    </div>
+</form>
+{% endblock %}
+
