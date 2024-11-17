@@ -15,7 +15,7 @@ app.register_blueprint(lab4)
 @app.errorhandler(404)
 def not_found(err):
     path404 = url_for("static", filename="404.css")
-    img404 = url_for("static", filename="2034479.png")
+    img404 = url_for("static", filename="lab1/2034479.png")
     return '''
 <!doctype html>
 <html>
