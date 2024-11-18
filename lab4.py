@@ -44,12 +44,12 @@ def sum():
 
 
 @lab4.route('/lab4/diff-form')
-def sum_form():
+def diff_form():
     return render_template('lab4/diff-form.html')
 
 
 @lab4.route('/lab4/diff', methods = ['POST'])
-def sum():
+def diff():
     x1 = request.form.get('x1')
     x2 = request.form.get('x2')
     if x1 == '' or x2 == '':
@@ -61,17 +61,17 @@ def sum():
 
 
 @lab4.route('/lab4/expo-form')
-def sum_form():
+def expo_form():
     return render_template('lab4/expo-form.html')
 
 
 @lab4.route('/lab4/expo', methods = ['POST'])
-def sum():
+def expo():
     x1 = request.form.get('x1')
     x2 = request.form.get('x2')
     if x1 == '' or x2 == '':
         return render_template('lab4/expo.html', error = 'Оба поля должны быть заполнены!')
-    if x1 == '0' or x2 == '0':
+    if x1 == '0' and x2 == '0':
         return render_template('lab4/expo.html', error = 'Оба поля не должны быть равны нулю!')
     x1 = int(x1)
     x2 = int(x2)
@@ -80,12 +80,12 @@ def sum():
 
 
 @lab4.route('/lab4/mult-form')
-def sum_form():
+def mult_form():
     return render_template('lab4/mult-form.html')
 
 
 @lab4.route('/lab4/mult', methods = ['POST'])
-def sum():
+def mult():
     x1 = request.form.get('x1')
     x2 = request.form.get('x2')
     if x1 == '':
