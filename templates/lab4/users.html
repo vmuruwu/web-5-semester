@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{# номер лабораторной работы: #}
+{% block lab %} Лабораторная работа 4 {% endblock %}
+
+{# основной контент: #}
+{% block main %}
+    <h1>Список пользователей</h1>
+    <table>
+        <tr>
+            <th>Имя</th>
+            <th>Логин</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.login }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Управление аккаунтом</h2>
+    <form action="/lab4/edit-user" method="get">
+        <button type="submit">Редактировать данные</button>
+    </form>
+    <form action="/lab4/delete-user" method="post">
+        <button type="submit">Удалить аккаунт</button>
+    </form>
+{% endblock %}

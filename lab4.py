@@ -150,9 +150,71 @@ def login():
 
     return render_template('lab4/login.html', error=error, login=login, authorized=False)
 
+
 @lab4.route('/lab4/logout', methods=['POST'])
 def logout():
     session.pop('login', None)
+    return redirect('/lab4/login')
+
+
+@lab4.route('/lab4/registration', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+        name = request.form.get('name')
+        gender = request.form.get('gender')
+
+        if not login or not password or not name or not gender:
+            error = 'Все поля должны быть заполнены'
+            return render_template('lab4/registration.html', error=error)
+
+        if any(user['login'] == login for user in users):
+            error = 'Логин уже занят'
+            return render_template('lab4/registration.html', error=error)
+
+        users.append({'login': login, 'password': password, 'name': name, 'gender': gender})
+        return redirect('/lab4/login')
+
+    return render_template('lab4/registration.html')
+
+
+@lab4.route('/lab4/users')
+def list_users():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+    
+    return render_template('lab4/users.html', users=users)
+
+
+@lab4.route('/lab4/edit-user', methods=['GET', 'POST'])
+def edit_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    user_login = session['login']
+    user = next((user for user in users if user['login'] == user_login), None)
+
+    if request.method == 'POST':
+        new_name = request.form.get('name')
+        new_password = request.form.get('password')
+        if new_name:
+            user['name'] = new_name
+        if new_password:
+            user['password'] = new_password
+        return redirect('/lab4/users')
+
+    return render_template('lab4/edit-user.html', user=user)
+
+
+@lab4.route('/lab4/delete-user', methods=['POST'])
+def delete_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    user_login = session.pop('login', None)
+    global users
+    users = [user for user in users if user['login'] != user_login]
     return redirect('/lab4/login')
 
 
