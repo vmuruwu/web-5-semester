@@ -151,10 +151,10 @@ def create():
 
     if current_app.config['DB_TYPE'] == 'postgres':
         cur.execute("INSERT INTO articles(user_id, tittle, article_text)\
-                    VALUES (%s, %s, %s);", (user_id, tittle, article_text))
+                    VALUES (%s, %s, %s);", (user_id, title, article_text))
     else:
         cur.execute("INSERT INTO articles(user_id, tittle, article_text)\
-                    VALUES (?, ?, ?);", (user_id, tittle, article_text))
+                    VALUES (?, ?, ?);", (user_id, title, article_text))
 
     db_close(conn, cur)
     return redirect('/lab5')
