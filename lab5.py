@@ -31,15 +31,22 @@ def db_connect():
 
 def db_close(conn, cur):
     try:
-        if conn and not conn.closed:  # Проверяем, что соединение открыто
+        # Для PostgreSQL
+        if current_app.config['DB_TYPE'] == 'postgres' and conn and not conn.closed:
+            conn.commit()
+        # Для SQLite
+        elif current_app.config['DB_TYPE'] != 'postgres' and conn:
             conn.commit()
     except Exception as e:
         print(f"Ошибка при commit: {e}")
     finally:
         if cur:
             cur.close()
-        if conn and not conn.closed:
-            conn.close()
+        if conn:
+            try:
+                conn.close()
+            except Exception as e:
+                print(f"Ошибка при закрытии соединения: {e}")
 
 
 @lab5.route('/lab5/login', methods=['GET', 'POST'])
@@ -74,8 +81,7 @@ def login():
         return render_template('lab5/success_login.html', login=login)
     
     finally:
-        pass
-       # db_close(conn, cur)
+        db_close(conn, cur)
 
 @lab5.route('/lab5/register', methods=['GET', 'POST'])
 def register():
