@@ -30,9 +30,17 @@ def db_connect():
     return conn, cur
 
 def db_close(conn, cur):
-    conn.commit()
-    cur.close()
-    conn.close()
+    try:
+        if conn and not conn.closed:  # Проверяем, что соединение открыто
+            conn.commit()
+    except Exception as e:
+        print(f"Ошибка при commit: {e}")
+    finally:
+        if cur:
+            cur.close()
+        if conn and not conn.closed:
+            conn.close()
+
 
 @lab5.route('/lab5/login', methods=['GET', 'POST'])
 def login():
