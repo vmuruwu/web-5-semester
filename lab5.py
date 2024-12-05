@@ -154,8 +154,12 @@ def list_articles():
                 cur.execute("SELECT * FROM articles WHERE is_public=1;")    
         articles = cur.fetchall()
 
+        if not articles:
+            return render_template('/lab5/articles.html', articles=[], message="У вас пока нет статей.")
+
         db_close(conn, cur)
         return render_template('/lab5/articles.html', articles=articles)
+
 
     finally:
         db_close(conn, cur)
