@@ -1,33 +1,31 @@
 {% extends "base.html" %}
 
 {# номер лабораторной работы: #}
-{% block lab %} Лабораторная работа 5 {% endblock %}
+{% block lab %} Лабораторная работа 5{% endblock %}
 
 {# основной контент: #}
 {% block main %}
-    <h1> Создание статьи</h1>
+    <h1>Редактирование статьи</h1>
 
     <form method="post">
         <div>
             <label>
                 Название статьи:
-                <input type="text" maxlength="50" name="title" required>
+                <input type="text" maxlength="50" name="title" value="{{ article['tittle'] }}">
             </label>
         </div>
 
         <div>
-            <label>
-                Текст статьи:
-                <textarea name="article_text" required></textarea>
-            </label>
+            <textarea name="article_text">{{ article['article_text'] }}</textarea>
         </div>
         
-        <div>
-            <button type="submit">Готово</button>
-        </div>
-
         {% if error %}
             <div style="color: red; font-style: italic;">{{ error }}</div>
         {% endif %}
+
+        <div>
+            <button type="submit">Сохранить</button>
+            <a href="/lab5/list">Отмена</a>
+        </div>
     </form>
 {% endblock %}
