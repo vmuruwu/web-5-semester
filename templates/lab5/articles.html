@@ -13,16 +13,42 @@
         {% for article in articles %}
             <h2>{{ article['tittle'] }}</h2>
             <blockquote>{{ article['article_text'] }}</blockquote>
-            <div>
+            <p><strong>Лайков:</strong> {{ article['likes'] }}</p>
+            <div class="button-row">
                 <a href="/lab5/edit/{{ article['id'] }}">Редактировать</a>
                 
                 <form action="/lab5/delete/{{ article['id'] }}" method="POST" style="display:inline;">
                     <button type="submit" onclick="return confirm('Вы уверены, что хотите удалить эту статью?')">Удалить</button>
                 </form>
+
+                <form method="post" action="{{ url_for('lab5.toggle_favorite', article_id=article['id']) }}">
+                    {% if article['is_favorite'] %}
+                        <button type="submit">Убрать из любимых</button>
+                    {% else %}
+                        <button type="submit">Добавить в любимые</button>
+                    {% endif %}
+                </form>
+
+                {% if article['is_public'] %}
+                    <form method="post" action="{{ url_for('lab5.toggle_public', article_id=article['id']) }}">
+                        <button type="submit">Скрыть</button>
+                    </form>
+                {% else %}
+                    <form method="post" action="{{ url_for('lab5.toggle_public', article_id=article['id']) }}">
+                        <button type="submit">Сделать публичной</button>
+                    </form>
+                {% endif %}
+
+                {% if article['is_public'] and article['user_id'] != session.get('user_id') %}
+                    <form method="post" action="{{ url_for('lab5.like_article', article_id=article['id']) }}">
+                        <button type="submit">Лайкнуть</button>
+                    </form>
+                {% endif %}
             </div>
         {% endfor %}
-
     {% endif %}
 {% endblock %}
+
+
 
 
