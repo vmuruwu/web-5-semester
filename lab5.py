@@ -121,17 +121,14 @@ def register():
 @lab5.route('/lab5/list')
 def list_articles():
     login = session.get('login')
-    if not login:
-        return redirect('/lab5/login')
-    
     conn, cur = db_connect()
 
     try:
         if login:
             if current_app.config['DB_TYPE'] == 'postgres':
-                cur.execute("SELECT id FROM users WHERE login=%s;", (login, ))
+                cur.execute("SELECT id FROM users WHERE login=%s;", (login,))
             else:
-                cur.execute("SELECT id FROM users WHERE login=?;", (login, ))
+                cur.execute("SELECT id FROM users WHERE login=?;", (login,))
             user_id = cur.fetchone()['id']
 
             if current_app.config['DB_TYPE'] == 'postgres':
@@ -146,12 +143,12 @@ def list_articles():
                     WHERE user_id=? OR is_public=1 
                     ORDER BY is_favorite DESC;
                 """, (user_id,))
-                
         else:
             if current_app.config['DB_TYPE'] == 'postgres':
-                cur.execute("SELECT * FROM articles WHERE is_public=TRUE;") 
+                cur.execute("SELECT * FROM articles WHERE is_public=TRUE;")
             else:
-                cur.execute("SELECT * FROM articles WHERE is_public=1;")    
+                cur.execute("SELECT * FROM articles WHERE is_public=1;")
+
         articles = cur.fetchall()
 
         if not articles:
@@ -160,9 +157,9 @@ def list_articles():
         db_close(conn, cur)
         return render_template('/lab5/articles.html', articles=articles)
 
-
     finally:
         db_close(conn, cur)
+
 
 
 
@@ -352,15 +349,25 @@ def toggle_public(article_id):
 
     try:
         if current_app.config['DB_TYPE'] == 'postgres':
-            cur.execute("SELECT is_public FROM articles WHERE id=%s;", (article_id,))
+            cur.execute("SELECT id FROM users WHERE login=%s;", (login,))
         else:
-            cur.execute("SELECT is_public FROM articles WHERE id=?;", (article_id,))
+            cur.execute("SELECT id FROM users WHERE login=?;", (login,))
+        user_id = cur.fetchone()['id']
+
+        if current_app.config['DB_TYPE'] == 'postgres':
+            cur.execute("SELECT user_id, is_public FROM articles WHERE id=%s;", (article_id,))
+        else:
+            cur.execute("SELECT user_id, is_public FROM articles WHERE id=?;", (article_id,))
         
         article = cur.fetchone()
         if not article:
             return "Статья не найдена", 404
 
+        if article['user_id'] != user_id:
+            return "У вас нет прав изменять публичный статус этой статьи", 403
+
         new_status = not article['is_public']
+
         if current_app.config['DB_TYPE'] == 'postgres':
             cur.execute("UPDATE articles SET is_public=%s WHERE id=%s;", (new_status, article_id))
         else:
@@ -368,8 +375,10 @@ def toggle_public(article_id):
         
         conn.commit()
         return redirect('/lab5/list')
+
     finally:
         db_close(conn, cur)
+
 
 
 @lab5.route('/lab5/like/<int:article_id>', methods=['POST'])
