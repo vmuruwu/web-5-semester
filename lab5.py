@@ -74,7 +74,8 @@ def login():
         return render_template('lab5/success_login.html', login=login)
     
     finally:
-        db_close(conn, cur)
+        pass
+       # db_close(conn, cur)
 
 @lab5.route('/lab5/register', methods=['GET', 'POST'])
 def register():
