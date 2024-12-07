@@ -1,52 +1,59 @@
 body {
-    background-color:aliceblue;
-    color:#300f31;
-    font-family: Arial;
-    margin: 0px;
+    background-color: #f0f8ff;
+    color: #333333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 header {
     background-color: #fedeff;
-    color:#330a10;
-    font-family:Impact;
+    color: #330a10;
+    font-family: Impact, sans-serif;
     padding: 7px;
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
+    z-index: 1000;
     cursor: pointer;
 }
 
 main {
-    background-color:aliceblue;
-    color:#3c1c06;
-    font-family:Helvetica;
-    padding: 7px;
-    margin: 34px 20px 34px;
+    background-color: #f0f8ff;
+    color: #333333;
+    font-family: Helvetica, sans-serif;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer {
     background-color: #fedeff;
-    color:#17312f;
-    font-family:Impact;
-    margin: 0px;
+    color: #17312f;
+    font-family: Impact, sans-serif;
     padding: 7px;
     position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
+    z-index: 1000;
     cursor: pointer;
 }
 
 .error {
-    color:#ff0000;
-    font-family:Impact;
+    color: #ff0000;
+    font-family: Impact, sans-serif;
 }
 
 .nav-bar {
-    background-color: pink;
+    background-color: #e0bbe4;
     padding: 10px 0;
     text-align: center;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 .nav-bar ul {
@@ -58,26 +65,28 @@ footer {
 
 .nav-bar ul li {
     display: inline;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .nav-bar ul li a {
-    color: black;
+    color: #7e009a;
     text-decoration: none;
     padding: 10px 20px;
-    border: 1px solid black;
+    border: 1px solid #7e009a;
     border-radius: 4px;
-    background-color: white;
-    transition: background-color 0.3s;
+    background-color: #ffffff;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .nav-bar ul li a:hover {
-    background-color: #ddd;
+    background-color:#7e009a;
+    color: #ffffff;
 }
 
 h1, h2 {
     margin: 0;
     padding-bottom: 20px;
+    font-weight: normal;
 }
 
 blockquote {
@@ -89,16 +98,18 @@ blockquote {
 }
 
 button {
-    background-color: #8500cc;
+    background-color: #7e009a;
     color: #ffffff;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-    background-color: #690099;
+    background-color: #5f007c;
+    transform: translateY(-2px);
 }
 
 input, textarea {
@@ -110,25 +121,53 @@ input, textarea {
 
 .button-row {
     display: flex;
-    gap: 10px; /* Расстояние между кнопками */
+    gap: 10px;
     align-items: center;
+    margin-top: 20px;
 }
 
 .button-row .btn {
     padding: 5px 10px;
-    background-color: #6200ea;
+    background-color: #7e009a;
     color: white;
     text-decoration: none;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     text-align: center;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button-row .btn:hover {
-    background-color: #4500b5;
+    background-color: #5f007c;
+    transform: translateY(-2px);
 }
 
 .button-row form {
-    margin: 0; /* Убираем отступы формы */
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+ul li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul li button {
+    margin-left: 10px;
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
 }

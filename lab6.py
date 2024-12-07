@@ -1,11 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, session
 lab6 = Blueprint('lab6', __name__)
 
-#venv\Scripts\activate.bat
-
 offices = []
 for i in range(1, 11):
-    offices.append({"number": i, "tenant": ""})
+    offices.append({"number": i, "tenant": "", "price": 900 + (i % 3) * 50})
 
 @lab6.route('/lab6/')
 def lab():
