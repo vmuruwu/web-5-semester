@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Поиск книг</title>
+    <link rel="stylesheet" type="text/css" href="/rgz_static/main.css">
+</head>
+<body>
+    <div class="menu">
+        <div>
+            {% if current_user.username == 'artem' %}
+                <div class="links">
+                    <a class="user_name">Вы вошли как: {{ current_user.username }}</a>
+                    <a href="{{ url_for('index') }}" class="profile_but">Главное меню</a>
+                    <a href="{{ url_for('logout') }}" class="profile_but">Выйти</a>
+                    <div class="admin">
+                        <a>Салют!</a>
+                        <br>
+                        <a>Тебе можно добавлять книги!</a>
+                        <br>
+                        <a href="{{ url_for('create_book') }}" class="admin_but">Создать книгу</a>
+                        <a href="{{ url_for('edit_book') }}" class="admin_but">Редактировать</a>
+                        <a href="{{ url_for('delete_book') }}" class="admin_but">Удалить книгу</a>
+                    </div>
+                </div>
+            {% elif current_user.is_authenticated %}
+                <div class="links">
+                    <a class="profile_but">Вы вошли как: {{ current_user.username }}</a>
+                    <a href="{{ url_for('index') }}" class="profile_but">Главное меню</a>
+                    <a href="{{ url_for('logout') }}" class="profile_but">Выйти</a>
+                </div>
+            {% else %}
+                <div class="links">
+                    <a href="{{ url_for('index') }}" class="profile_but">Главное меню</a>
+                    <a href="{{ url_for('login') }}" class="profile_but">Войти</a>
+                    <a href="{{ url_for('register') }}" class="profile_but">Регистрация</a>
+                </div>
+            {% endif %}
+        </div>
+        <div class="search">
+            <h1>Поиск книг</h1>
+
+            <form method="POST" action="{{ url_for('search') }}">
+                <input type="text" name="query" placeholder="Поиск" class="text_search">
+                <select name="mode" class="select">
+                    <option value="" disabled selected>Поиск по:</option>
+                    <option value="title">Название</option>
+                    <option value="author">Автор</option>
+                    <option value="publisher">Издательство</option>
+                </select>
+                <select name="sort" class="select">
+                    <option value="" disabled selected>Сортировка по:</option>
+                    <option value="title">Название</option>
+                    <option value="author">Автор</option>
+                    <option value="publisher">Издательство</option>
+                    <option value="pages">Количество страниц</option>
+                </select>
+                <input type="text" name="min_pages" placeholder="Мин. стр." class="text_pages">
+                <input type="text" name="max_pages" placeholder="Макс. стр." class="text_pages">        
+                <button type="submit" class="button">Искать</button>
+            </form>
+
+            {% if books %}
+                <ul>
+                    {% for book in books %}
+                        <li>
+                            <p><img src="{{ book.cover_photo }}" alt="{{ book.title }}" width="200"></p>
+                            <h2>{{ book.title }}</h2>
+                            <p>Автор: {{ book.author }}</p>
+                            <p>Количество страниц: {{ book.num_pages }}</p>
+                            <p>Издательство: {{ book.publisher }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+               <p>Книги не найдены</p>
+            {% endif %}
+        </div>
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('search', page=page-1) }}" class="link_left_s">Предыдущая страница</a>
+            {% endif %}
+        
+            {% if (page * per_page) < total_books %}
+                <a href="{{ url_for('search', page=page+1) }}" class="link_right_s">Следующая страница</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

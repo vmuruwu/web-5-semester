@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Главная страница</title>
+    <link rel="stylesheet" type="text/css" href="/static/rgz_main.css">
+</head>
+<body>
+    <div class="menu">
+        <div class="links">
+            {% if current_user.is_authenticated %}
+            <div class="links">
+                <a class="profile_but">Вы вошли как: {{ current_user.username }}</a>
+                <a class="profile_but" href="{{ url_for('search') }}">Перейти к поиску книг</a>
+                <a href="{{ url_for('logout') }}" class="profile_but">Выйти</a>
+            </div>
+            {% else %}
+            <div class="links">
+                <a href="{{ url_for('search') }}" class="profile_but">Перейти к поиску книг</a>
+                <a href="{{ url_for('login') }}" class="profile_but">Войти</a>
+                <a href="{{ url_for('register') }}" class="profile_but">Регистрация</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="glav_str"><h1>Главная страница</h1></div>
+        <div class="main_page">
+            {% if books %}
+                <ul>
+                    {% for book in books %}
+                        <li>
+                            <p><img src="{{ book.cover_photo }}" alt="{{ book.title }}" width="200"></p>
+                            <h2>{{ book.title }}</h2>
+                            <p>Автор: {{ book.author }}</p>
+                            <p>Количество страниц: {{ book.num_pages }}</p>
+                            <p>Издательство: {{ book.publisher }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+               <p>Книги не найдены</p>
+            {% endif %}
+        </div>
+        <div class="pagination">
+            {% if page > 1 %}
+                <a href="{{ url_for('index', page=page-1) }}" class="link_left_v">Предыдущая страница</a>
+            {% endif %}
+        
+            {% if (page * per_page) < total_books %}
+                <a href="{{ url_for('index', page=page+1) }}" class="link_right_v">Следующая страница</a>
+            {% endif %}
+    </div>
+</body>
+</html>

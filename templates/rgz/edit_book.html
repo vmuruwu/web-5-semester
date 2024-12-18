@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактировать книгу</title>
+    <link rel="stylesheet" type="text/css" href="/static/rgz_main.css">
+</head>
+<body>
+    <div class="cre_back">
+        <h1>Редактировать книгу</h1>
+        <form method="POST" action="{{ url_for('edit_book', book_id=book.id) }}">
+            <input type="int" name="id" placeholder="id книги"><br>
+            <input type="text" name="cover_photo" placeholder="Ссылка на фотографию"><br>
+            <input type="text" name="title" placeholder="Название книги"><br>
+            <textarea name="author" placeholder="Автор">{{ book.author }}</textarea><br>
+            <textarea name="num_pages" placeholder="Количество страниц">{{ book.num_pages }}</textarea><br>
+            <textarea name="publisher" placeholder="Издательство">{{ book.publisher }}</textarea><br>
+            <button type="submit">Сохранить</button>
+        </form>
+
+        <a href="{{ url_for('search') }}" class="select">На главную</a>
+        {% if list_books_for %}
+                <ul>
+                    {% for book in list_books_for %}
+                        <li>
+                            {{ book.id }}
+                            {{ book.cover_photo }}
+                            {{ book.title }}
+                            {{ book.author }}
+                            {{ book.num_pages }}
+                            {{ book.publisher }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+               <p>Книги не найдены</p>
+        {% endif %}
+    </div>
+</body>
+</html>

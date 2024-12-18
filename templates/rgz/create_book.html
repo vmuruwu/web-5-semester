@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить новый рецепт</title>
+    <link rel="stylesheet" type="text/css" href="/static/rgz_main.css">
+</head>
+<body>
+    <div class="cre_back">
+        <h1>Добавить новый рецепт</h1>
+        <form method="POST" action="{{ url_for('create_book') }}">
+            <input type="text" name="cover_photo" placeholder="Ссылка на фотографию"><br>
+            <input type="text" name="title" placeholder="Название книги"><br>
+            <textarea name="author" placeholder="Автор"></textarea><br>
+            <textarea name="num_pages" placeholder="Количество страниц"></textarea><br>
+            <textarea name="publisher" placeholder="Издательство"></textarea><br>
+            <button type="submit">Добавить</button>
+        </form>
+
+        <a href="{{ url_for('search') }}" class="select">На главную</a>
+    </div>
+</body>
+</html>
