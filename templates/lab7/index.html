@@ -10,8 +10,8 @@
     .modal {
         display: none;
         z-index: 100;
-        box-shadow: 3px 3px 5px rgb(46, 0, 0);
-        background: whitesmoke;
+        box-shadow: 3px 3px 5px rgb(40, 0, 60);
+        background: rgb(171, 145, 212);
         width: 400px;
         left: 50%;
         top: 220px;
@@ -27,6 +27,9 @@
     }
     label{
         font-weight: bold;
+    }
+    .vvod{
+        background: rgb(252, 217, 245);
     }
     .error-message {
         color: red
@@ -61,20 +64,20 @@
         <input type = "hidden" id="id">
         <label>
             Название фильма на русском:
-            <input type="text" id="title_ru">
+            <input class="vvod" type="text" id="title_ru">
         </label> <br>
         <label>
             Название фильма на оригинальном языке
             <i>(если фильм русский, оставьте поле пустым):</i>
-            <input type="text" id="title">
+            <input class="vvod" type="text" id="title">
         </label> <br>
         <label>
             Год выпуска:
-            <input type="number" id="year">
+            <input class="vvod" type="number" id="year">
         </label> <br>
         <label>
             Описание:
-            <textarea id="description"></textarea>
+            <textarea class="vvod" id="description"></textarea>
             <div id="description-error" class = "error-message"></div>
         </label> <br>
 
