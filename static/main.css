@@ -48,6 +48,8 @@ footer {
     font-family: Impact, sans-serif;
 }
 
+/* лаба 5 */
+
 .nav-bar {
     background-color: #e0bbe4;
     padding: 10px 0;
@@ -168,6 +170,49 @@ ul li button {
 }
 
 p {
-    font-size: 18px;
-    font-weight: bold;
+    text-align: right;
+    margin: 30px;
+    font-size: 14px;
+    color: #000;
+}
+
+/* лаба 8 */
+
+.block-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #9c69af;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.block-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.block {
+    text-decoration: none;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.block:hover {
+    background-color: #e0e0e0;
+}
+
+.user-status {
+    font-size: 16px;
+    color: #000;
+    margin-left: 20px;
+    white-space: nowrap;
 }
