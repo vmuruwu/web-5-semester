@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, session, abort
+from flask import Blueprint, render_template, request, redirect, session, abort, jsonify
 lab7 = Blueprint('lab7', __name__)
 
 @lab7.route('/lab7/')
@@ -41,14 +41,14 @@ films = [
 
 @lab7.route('/lab7/rest-api/films/', methods=['GET'])
 def get_films():
-    return films
-
+    return jsonify(films)
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['GET'])
 def get_film(id):
     if id < 0 or id >= len(films):
         abort(404)
-    return films[id]
+    return jsonify(films[id])
+
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['DELETE'])
 def del_film(id):
@@ -57,15 +57,19 @@ def del_film(id):
     del films[id]
     return '', 204
 
+
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT'])
 def put_film(id):
     if id < 0 or id >= len(films):
         abort(404)
     film = request.get_json()
     if film ['description'] == '':
-        return {'description': 'Заполните описание'}, 400
+        return jsonify({'description': 'Заполните описание'}), 400
+    if not film.get('title'):
+        film['title'] = film['title_ru']
     films[id] = film
-    return films[id]
+    return jsonify(films[id])
+
 
 @lab7.route('/lab7/rest-api/films/', methods=['POST'])
 def add_film():
@@ -73,6 +77,8 @@ def add_film():
     if not film:
         abort(400)
     if film.get('description', '') == '':
-        return {'description': 'Заполните описание'}, 400
+        return jsonify({'description': 'Заполните описание'}), 400
+    if not film.get('title'):
+        film['title'] = film['title_ru']
     films.append(film)
-    return film, 201
+    return jsonify(film), 201
