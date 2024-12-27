@@ -11,10 +11,12 @@
     <h2 style="text-align: center;"> База знаний</h2>
     <div class="block-container">
         <div class="block-group">
+            <a href="{{ url_for('lab8.article_list') }}" class="block">Список статей</a>
+            <a href="{{ url_for('lab8.login') }}" class="block">Войти</a>
             <a href="{{ url_for('lab8.register') }}" class="block">Регистрация</a>
-            <a href="{{ url_for('lab8.login') }}" class="block">Вход</a>
-            <a href="{{ url_for('lab8.article_list') }}" class="block">Статьи</a>
+            <a href="{{ url_for('lab8.logout') }}" class="block">Выход</a>
         </div>
-        <span class="user-status">Anonymous</span>
-    </div>
+        <div class="user-status">
+            {{ login if login else 'Anonymous' }}
+        </div>
 {% endblock %}
