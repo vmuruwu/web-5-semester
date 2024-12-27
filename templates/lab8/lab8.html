@@ -11,10 +11,9 @@
     <h2 style="text-align: center;"> База знаний</h2>
     <div class="block-container">
         <div class="block-group">
-            <a href="/lab8/articles" class="block">Список статей</a>
-            <a href="/lab8/create" class="block">Создать статью</a>
-            <a href="/lab8/login" class="block">Войти</a>
-            <a href="/lab8/register" class="block">Регистрация</a>
+            <a href="{{ url_for('lab8.register') }}" class="block">Регистрация</a>
+            <a href="{{ url_for('lab8.login') }}" class="block">Вход</a>
+            <a href="{{ url_for('lab8.article_list') }}" class="block">Статьи</a>
         </div>
         <span class="user-status">Anonymous</span>
     </div>
