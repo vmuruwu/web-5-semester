@@ -34,6 +34,7 @@ def register():
     new_user = users(login=login_form, password=password_hash)
     db.session.add(new_user)
     db.session.commit()
+    login_user(new_user, remember=False)
     return redirect('/lab8/')
 
 
@@ -51,10 +52,11 @@ def login():
     if not password_form:
         return render_template('lab8/login.html',
                                error='Пароль не должен быть пустым')
-    if user:
-        if check_password_hash(user.password, password_form):
-            login_user(user, remember=False)
-            return redirect('/lab8/')
+    
+    user = users.query.filter_by(login=login_form).first()
+    if user and check_password_hash(user.password, password_form):
+        login_user(user)
+        return redirect('/lab8/')
         
     return render_template('/lab8/login.html',
                            error = 'Ошибка входа: логин и/или пароль неверны')
@@ -63,7 +65,8 @@ def login():
 @lab8.route('/lab8/articles/')
 @login_required
 def article_list():
-    return "Спиоск статей"
+    user_articles = articles.query.filter_by(login_id=current_user.id).all()
+    return render_template('lab8/articles.html', articles=user_articles)
 
 
 @lab8.route('/lab8/logout')
@@ -71,3 +74,37 @@ def article_list():
 def logout():
     logout_user()
     return redirect('/lab8/')
+
+
+@lab8.route('/lab8/create', methods=['GET', 'POST'])
+@login_required
+def create():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        article_text = request.form.get('article_text')
+        new_article = articles(login_id=current_user.id, title=title, article_text=article_text)
+        db.session.add(new_article)
+        db.session.commit()
+        return redirect('/lab8/articles')
+    return render_template('lab8/create.html')
+
+
+@lab8.route('/lab8/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    article = articles.query.get_or_404(id)
+    if request.method == 'POST':
+        article.title = request.form.get('title')
+        article.article_text = request.form.get('article_text')
+        db.session.commit()
+        return redirect('/lab8/articles')
+    return render_template('lab8/edit.html', article=article)
+
+
+@lab8.route('/lab8/delete/<int:id>', methods=['POST'])
+@login_required
+def delete(id):
+    article = articles.query.get_or_404(id)
+    db.session.delete(article)
+    db.session.commit()
+    return redirect('/lab8/articles')

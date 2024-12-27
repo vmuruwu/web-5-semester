@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block lab %}Лабораторная работа 8{% endblock %}
+
+{% block main %}
+    <h1>Создать статью</h1>
+    <form action="/lab8/create" method="post">
+        <div>
+            <label>Название: <input type="text" name="title"></label>
+        </div>
+        <div>
+            <label>Статья: <textarea name="article_text"></textarea></label>
+        </div>
+        <button type="submit">Создать</button>
+    </form>
+{% endblock %}

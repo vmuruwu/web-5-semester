@@ -15,6 +15,7 @@
             <a href="{{ url_for('lab8.login') }}" class="block">Войти</a>
             <a href="{{ url_for('lab8.register') }}" class="block">Регистрация</a>
             <a href="{{ url_for('lab8.logout') }}" class="block">Выход</a>
+            <a href="{{ url_for('lab8.create') }}" class="block">Создать статью</a>
         </div>
         <div class="user-status">
             {{ login if login else 'Anonymous' }}
