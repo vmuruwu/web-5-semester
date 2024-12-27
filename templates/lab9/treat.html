@@ -1,0 +1,15 @@
+{% extends "base1.html" %}
+
+{% block lab %} Выбор подарка {% endblock %}
+
+{% block main %}
+    <h1>Что вам больше нравится, {{ name }}?</h1>
+    <form method="post">
+        <div class="radio-container">
+            <label><input type="radio" name="treat" value="sweat" required> Сладкое</label><br>
+            <label><input type="radio" name="treat" value="sytnoe" required> Сытное</label><br>
+        </div>
+        
+        <button type="submit">Далее</button>
+    </form>
+{% endblock %}

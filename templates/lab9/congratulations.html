@@ -1,0 +1,17 @@
+{% extends "base1.html" %}
+
+{% block lab %} Поздравление {% endblock %}
+
+{% block main %}
+    <div class="text-container">
+        <h1 class="fade-in">Поздравляем, {{ name }}!</h1>
+        <p class="fade-in">Поздравляю тебя, {{ name }}, желаю, чтобы ты {{ pronoun }}. Вот тебе подарок — {{ gift }}.</p>
+    </div>
+    
+    {% if treat == 'sweat' %}
+        <img src="{{ url_for('static', filename='candies.jpg') }}" alt="Подарок" class="congratulation-img">
+    {% else %}
+        <img src="{{ url_for('static', filename='cake.jpg') }}" alt="Подарок" class="congratulation-img">
+    {% endif %}
+{% endblock %}
+

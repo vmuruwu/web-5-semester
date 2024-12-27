@@ -1,12 +1,12 @@
-{% extends "base.html" %}
+{% extends "base1.html" %}
 
-{# Номер лабораторной работы: #}
-{% block lab %} Лабораторная работа 8 {% endblock %}
+{% block lab %} Лабораторная работа 9 {% endblock %}
 
-{% block script %}
-{% endblock %}
-
-{# Основной контент: #}
 {% block main %}
-    <h1>Поздравления</h1>
+    <h1>Введите ваше имя</h1>
+    <form method="post">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <button type="submit">Далее</button>
+    </form>
 {% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "base1.html" %}
+
+{% block lab %} Ввод пола {% endblock %}
+
+{% block main %}
+    <h1>Укажите ваш пол, {{ name }}:</h1>
+    <form method="post">
+        <div class="radio-container">
+            <label><input type="radio" name="gender" value="male" required> Мужчина</label><br>
+            <label><input type="radio" name="gender" value="female" required> Женщина</label><br>
+        </div>
+        <button type="submit">Далее</button>
+    </form>
+{% endblock %}
+

@@ -1,0 +1,11 @@
+{% extends "base1.html" %}
+
+{% block lab %} Ввод возраста {% endblock %}
+
+{% block main %}
+    <h1>Введите ваш возраст, {{ name }}:</h1>
+    <form method="post">
+        <input type="number" name="age" placeholder="Ваш возраст" required>
+        <button type="submit">Далее</button>
+    </form>
+{% endblock %}
