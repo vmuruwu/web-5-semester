@@ -10,10 +10,11 @@ from lab7 import lab7
 from lab8 import lab8
 
 import os
+
 from os import path
 from flask_sqlalchemy import SQLAlchemy
 from db import db
-from urllib.parse import quote
+
 
 app = Flask(__name__)
 
@@ -30,7 +31,7 @@ if app.config['DB_TYPE'] == 'postgres':
 else:
     dir_path = path.dirname(path.realpath(__file__))
     db_path = path.join(dir_path, "natalya_vtyurina_orm.db")
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///natalya_vtyurina_orm.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 
 db.init_app(app)
 
